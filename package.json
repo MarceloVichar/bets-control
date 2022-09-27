@@ -1,0 +1,29 @@
+{
+  "name": "bets-control",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx parcel src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarceloVichar/bets-control.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarceloVichar/bets-control/issues"
+  },
+  "homepage": "https://github.com/MarceloVichar/bets-control#readme",
+  "devDependencies": {
+    "parcel": "^2.7.0",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
+  },
+  "dependencies": {
+    "daisyui": "^2.31.0"
+  }
+}
