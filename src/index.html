@@ -1,13 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>bets control</title>
     <link href="./index.css" rel="stylesheet">
 </head>
 <body>
-<div class="navbar bg-primary"></div>
- <h1 class="text-center text-6xl font-bold">cheguei</h1>
- <button class="btn ">botao</button>
+<div class="navbar bg-primary flex flex-col md:flex-row justify-between">
+    <div class="flex gap-4">
+        <a href="index.html">
+            <button class="btn btn-ghost">Lançamentos</button>
+        </a>
+        <button class="btn btn-ghost" onclick="onClickBalanceLink()">Balanço</button>
+    </div>
+    <h1 id="name">Seja bem vindo</h1>
+</div>
+<main class="p-2 md:p-4">
+    <h1 class="text-2xl font-bold">Lançamentos</h1>
+    <div class="text-end" onload="onLoadButton()">
+        <label for="my-modal" class="btn modal-button btn-secondary">Nova aposta</label>
+    </div>
+
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="my-modal" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box flex flex-col gap-2">
+            <h3 class="font-bold text-lg">Cadastrar nova aposta</h3>
+            <div class="grid gap-1">
+                <label>Valor apostado</label>
+                <label class="input-group">
+                    <span>R$</span>
+                    <input type="number" class="input input-bordered w-full" />
+                </label>
+            </div>
+            <div class="grid gap-1">
+                <label>Retorno obtido</label>
+                <label class="input-group">
+                    <span>R$</span>
+                    <input type="number" class="input input-bordered w-full" />
+                </label>
+            </div>
+            <div class="modal-action flex justify-between">
+                <label for="my-modal" class="btn">Cancelar</label>
+                <div class="flex gap-1">
+                    <label id="clear" onclick="clear()" class="btn">Limpar campos</label>
+                    <label id="add" onclick="adds()" class="btn btn-secondary">Cadastrar</label>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="mt-4 w-full">
+            <table class="border border-1 w-full rounded">
+                <thead class="bg-secondary h-6">
+                    <th>ID</th>
+                    <th>Valor</th>
+                    <th>Retorno</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody class="h-10 text-center">
+                    <tr>
+                        <td>isd</td>
+                        <td>isd</td>
+                        <td>isd</td>
+                        <td class="flex justify-center items-center">
+                            <img src="../assets/img/edit.svg">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</main>
+<script src="index.js"></script>
 </body>
 </html>
