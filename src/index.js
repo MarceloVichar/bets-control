@@ -113,7 +113,15 @@ let showButtonModal = function () {
     }, 2000)
 }
 
-showButtonModal()
+showButtonModal();
+
+(function() {
+    const namePage = document.getElementsByName('pageName')[0]
+    namePage.textContent.length < 15
+        ? namePage.textContent = namePage.textContent.toUpperCase()
+        : namePage.textContent = namePage.textContent.toLowerCase()
+    
+})()
 
 const myInterval = setInterval(myTimer, 1000);
 
@@ -140,4 +148,9 @@ function greeting(name) {
 
 function onClickBalanceLink() {
     alert('Balanços estarão disponíveis em breve.')
+}
+
+function loadTable() {
+    const table = document.getElementsByTagName('table')[0]
+    table.classList.remove('hidden')
 }
