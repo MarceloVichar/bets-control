@@ -24,7 +24,11 @@ class Bet {
         bet.id = this.id
         bet.event = document.getElementById('event').value
         bet.value = document.getElementById('value').value
-        bet.ammount = document.getElementById('ammount').value
+        bet.ammount = document.getElementById('ammount').value;
+        
+        (function (x, y) {
+            bet.isPositive = x > y
+        })(bet.value, bet.ammount)
 
         return bet
     }
@@ -34,17 +38,20 @@ class Bet {
         tbody.innerText = ''
 
         for(let i = 0; i < this.betArray.length; i++) {
+            console.log(this.betArray[i]);
             let tr = tbody.insertRow()
 
             let td_id = tr.insertCell()
             let td_event = tr.insertCell()
             let td_value = tr.insertCell()
             let td_ammount = tr.insertCell()
+            let td_result = tr.insertCell()
             let td_actions = tr.insertCell()
 
             td_id.innerText = this.betArray[i].id
             td_event.innerText = this.betArray[i].event
             td_value.innerText = `R$ ${this.betArray[i].value}`
+            td_result.innerText = this.betArray[i].isPositive ? 'Lucro' : 'Prejuízo'
             td_ammount.innerText = `R$ ${this.betArray[i].ammount}`
             let remove = document.createElement('span')
             remove.innerText = 'X'
@@ -95,13 +102,29 @@ class Bet {
 
 let bet = new Bet
 
-let name = prompt("Qual seu nome?")
-document.getElementById('name').innerHTML = `Aqui estão seus lançamentos, ${name || ''}`
+let showButtonModal = function () {
+    setTimeout(() => {
+        
+        let button = document.getElementById('modalButton')
+        button.classList.remove('hidden')
+    }, 2000)
+}
+
+showButtonModal()
+
+const myInterval = setInterval(myTimer, 1000);
+
+function myTimer() {
+  const date = new Date();
+  document.getElementById("time").innerHTML = date.toLocaleTimeString();
+}
+
+(function () {
+    let name = prompt("Qual seu nome?")
+    document.getElementById('name').innerHTML = `Aqui estão seus lançamentos, ${name || ''}`
+})()
+
 
 function onClickBalanceLink() {
     alert('Balanços estarão disponíveis em breve.')
-}
-
-function adds() {
-    document.getElementById('add').setAttribute('for', 'my-modal')
 }
