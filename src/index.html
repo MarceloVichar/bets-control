@@ -20,56 +20,51 @@
     <div class="text-end" onload="onLoadButton()">
         <label for="my-modal" class="btn modal-button btn-secondary">Nova aposta</label>
     </div>
-
-    <!-- Put this part before </body> tag -->
-    <input type="checkbox" id="my-modal" class="modal-toggle" />
-    <div class="modal">
-        <div class="modal-box flex flex-col gap-2">
-            <h3 class="font-bold text-lg">Cadastrar nova aposta</h3>
-            <div class="grid gap-1">
-                <label>Valor apostado</label>
-                <label class="input-group">
-                    <span>R$</span>
-                    <input type="number" class="input input-bordered w-full" />
-                </label>
-            </div>
-            <div class="grid gap-1">
-                <label>Retorno obtido</label>
-                <label class="input-group">
-                    <span>R$</span>
-                    <input type="number" class="input input-bordered w-full" />
-                </label>
-            </div>
-            <div class="modal-action flex justify-between">
-                <label for="my-modal" class="btn">Cancelar</label>
-                <div class="flex gap-1">
-                    <label id="clear" onclick="clear()" class="btn">Limpar campos</label>
-                    <label id="add" onclick="adds()" class="btn btn-secondary">Cadastrar</label>
-                </div>
+    <div class="mt-4 w-full">
+        <table class="border border-secondary border-1 w-full rounded">
+            <thead class="bg-secondary p-2">
+            <th>ID</th>
+            <th>Evento</th>
+            <th>Valor</th>
+            <th>Retorno</th>
+            <th>Ações</th>
+            </thead>
+            <tbody id="tbody" class="h-10 text-center">
+            </tbody>
+        </table>
+    </div>
+</main>
+<input type="checkbox" id="my-modal" class="modal-toggle" />
+<div class="modal">
+    <div class="modal-box flex flex-col gap-2">
+        <h3 class="font-bold text-lg">Cadastrar nova aposta</h3>
+        <div class="grid gap-1">
+            <label>Evento</label>
+            <input type="text" id="event" class="input input-bordered w-full">
+        </div>
+        <div class="grid gap-1">
+            <label>Valor apostado</label>
+            <label class="input-group">
+                <span>R$</span>
+                <input type="number" id="value" class="input input-bordered w-full" />
+            </label>
+        </div>
+        <div class="grid gap-1">
+            <label>Retorno obtido</label>
+            <label class="input-group">
+                <span>R$</span>
+                <input type="number" id="ammount" class="input input-bordered w-full" />
+            </label>
+        </div>
+        <div class="modal-action flex flex-col md:flex-row md:justify-between gap-2">
+            <label for="my-modal" onclick="bet.clear()" class="btn btn-sm w-auto">Cancelar</label>
+            <div class="flex justify-center gap-1">
+                <label id="clear" onclick="bet.clear()" class="btn btn-sm">Limpar</label>
+                <label id="add" onclick="bet.save()" class="btn btn-sm btn-secondary">Cadastrar</label>
             </div>
         </div>
     </div>
-        <div class="mt-4 w-full">
-            <table class="border border-1 w-full rounded">
-                <thead class="bg-secondary h-6">
-                    <th>ID</th>
-                    <th>Valor</th>
-                    <th>Retorno</th>
-                    <th>Ações</th>
-                </thead>
-                <tbody class="h-10 text-center">
-                    <tr>
-                        <td>isd</td>
-                        <td>isd</td>
-                        <td>isd</td>
-                        <td class="flex justify-center items-center">
-                            <img src="../assets/img/edit.svg">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-</main>
+</div>
 <script src="index.js"></script>
 </body>
 </html>
