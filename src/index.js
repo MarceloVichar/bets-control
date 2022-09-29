@@ -25,10 +25,13 @@ class Bet {
         bet.event = document.getElementById('event').value
         bet.value = document.getElementById('value').value
         bet.ammount = document.getElementById('ammount').value;
-        
-        (function (x, y) {
-            bet.isPositive = x > y
+
+        let calcAmmount = (function (x, y) {
+            let aux = x > y
+            return aux
         })(bet.value, bet.ammount)
+
+        bet.isPositive = calcAmmount
 
         return bet
     }
@@ -119,10 +122,20 @@ function myTimer() {
   document.getElementById("time").innerHTML = date.toLocaleTimeString();
 }
 
-(function () {
-    let name = prompt("Qual seu nome?")
-    document.getElementById('name').innerHTML = `Aqui estão seus lançamentos, ${name || ''}`
-})()
+function greeting(name) {
+    alert(`Olá, ${name}`);
+  }
+  
+  function processUserInput(callback) {
+    (function () {
+        let name = prompt("Qual seu nome?")
+        document.getElementById('name').innerHTML = `Aqui estão seus lançamentos, ${name || ''}`
+        callback(name);
+    })()
+    
+  }
+  
+  processUserInput(greeting);
 
 
 function onClickBalanceLink() {
