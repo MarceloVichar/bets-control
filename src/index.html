@@ -17,7 +17,7 @@
     <h1 id="name">Seja bem vindo</h1>
 </div>
 <main class="p-2 md:p-4">
-    <h1 name="pageName" id="pageName" class="text-2xl font-bold">Lançamentos</h1>
+    <h1 name="pageName" onmouseenter="classList.add('text-success')" onmouseleave="onMouseLeaveinTitle()" id="pageName" class="text-2xl font-bold">Lançamentos</h1>
     <div class="text-end" onload="onLoadButton()">
         <label for="my-modal" id="modalButton" class="hidden btn modal-button btn-secondary">Nova aposta</label>
     </div>
@@ -42,7 +42,8 @@
         <h3 class="font-bold text-lg">Cadastrar nova aposta</h3>
         <div class="grid gap-1">
             <label>Evento</label>
-            <input type="text" id="event" class="input input-bordered w-full">
+            <input type="text" id="event" onblur="style.color = 'white'" onfocus="style.color = 'yellow'" class="input input-bordered w-full">
+            <span class="text-xs" id="spanInput"></label>
         </div>
         <div class="grid gap-1">
             <label>Valor apostado</label>

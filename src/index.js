@@ -154,3 +154,28 @@ function loadTable() {
     const table = document.getElementsByTagName('table')[0]
     table.classList.remove('hidden')
 }
+
+const title = document.getElementById('pageName')
+
+function onMouseEnterinTitle() {
+    title.classList.add('text-success')
+}
+
+function onMouseLeaveinTitle() {
+    title.classList.remove('text-success')
+}
+
+const span = document.getElementById('spanInput')
+function testCapsLock(event) {
+    if(event.code === "CapsLock"){
+        let isCapsLockOff = event.getModifierState("CapsLock");
+        if(isCapsLockOff) {
+            span.innerText = 'Capslock desativado'
+            return
+        } else {
+            span.innerText = 'Capslock ativado'
+        }
+    }
+}
+
+document.addEventListener("keydown", testCapsLock);
