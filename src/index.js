@@ -1,181 +1,145 @@
-class Bet {
-    constructor() {
-        this.id = 1
-        this.betArray = []
-    }
-    save() {
-        let bet = this.readData()
-        if (this.validate(bet)) {
-            document.getElementById('add').setAttribute('for', 'my-modal')
-            this.add(bet)
-        }
-        this.listBets()
-        this.clear()
-    }
+import myTimer from '../utils/timer';
+import Bet from './models/bet';
 
-    add(bet) {
-        this.betArray.push(bet)
-        this.id++
-    }
+'use strict';
 
-    readData() {
-        let bet = {}
+document.getElementById('pageName').addEventListener('mouseleave', onMouseLeaveinTitle);
+document.getElementById('add').addEventListener('click', save);
+document.getElementById('clear').addEventListener('click', clear);
+document.getElementById('close').addEventListener('click', clear);
+document.getElementById('table').addEventListener('load', loadTable);
 
-        bet.id = this.id
-        bet.event = document.getElementById('event').value
-        bet.value = document.getElementById('value').value
-        bet.ammount = document.getElementById('ammount').value;
-
-        let calcAmmount = (function (x, y) {
-            let aux = x > y
-            return aux
-        })(bet.value, bet.ammount)
-
-        bet.isPositive = calcAmmount
-
-        return bet
-    }
-
-    listBets(){
-        let tbody = document.querySelector('#tbody')
-        tbody.innerText = ''
-
-        for(let i = 0; i < this.betArray.length; i++) {
-            console.log(this.betArray[i]);
-            let tr = tbody.insertRow()
-
-            let td_id = tr.insertCell()
-            let td_event = tr.insertCell()
-            let td_value = tr.insertCell()
-            let td_ammount = tr.insertCell()
-            let td_result = tr.insertCell()
-            let td_actions = tr.insertCell()
-
-            td_id.innerText = this.betArray[i].id
-            td_event.innerText = this.betArray[i].event
-            td_value.innerText = `R$ ${this.betArray[i].value}`
-            td_result.innerText = this.betArray[i].isPositive ? 'Lucro' : 'Prejuízo'
-            td_ammount.innerText = `R$ ${this.betArray[i].ammount}`
-            let remove = document.createElement('span')
-            remove.innerText = 'X'
-            remove.style.color = 'red'
-            remove.setAttribute('onclick', 'bet.remove('+ this.betArray[i].id +')')
-            
-            td_actions.appendChild(remove)
-        }
-    }
-
-    validate(bet) {
-        let msg = ''
-        if (bet.event === '') {
-            msg += `Informe o evento \n`
-        }
-        if (bet.value === '') {
-            msg += `Informe o valor \n`
-        }
-        if (bet.ammount === '') {
-            msg += `Informe o retorno obtido \n`
-        }
-
-        if(msg !== '') {
-            alert(msg)
-            return false
-        }
-        return true
-    }
-
-    clear = () => {
-        document.getElementById('event').value = ''
-        document.getElementById('value').value = ''
-        document.getElementById('ammount').value = ''
-    }
-
-    remove = (id) => {
-        if (confirm('Deseja remover essa entrada?')) {
-            let tbody = document.querySelector('#tbody')
-            for(let i = 0; i < this.betArray.length; i++) {
-                if (this.betArray[i].id === id) {
-                    this.betArray.splice(i, 1)
-                    tbody.deleteRow(i)
-                }
-            }
-        }
-    }
+const bets = JSON.parse(localStorage.getItem('totalAmount') || '[]');
+listBets(bets);
+function save() {
+  const event = document.getElementById('event').value;
+  const amount = document.getElementById('amount').value;
+  const returns = document.getElementById('returns').value;
+  if (!validate({ event, amount, returns })) return;
+  document.getElementById('add').setAttribute('for', 'my-modal');
+  add(event, amount, returns);
+  clear();
 }
 
-let bet = new Bet
-
-let showButtonModal = function () {
-    setTimeout(() => {
-        
-        let button = document.getElementById('modalButton')
-        button.classList.remove('hidden')
-    }, 2000)
+function clear() {
+  document.getElementById('event').value = '';
+  document.getElementById('amount').value = '';
+  document.getElementById('returns').value = '';
 }
+
+function add(event, amount, returns) {
+  const bet = new Bet(event, amount, returns);
+
+  const totalAmount = JSON.parse(localStorage.getItem('totalAmount') || '[]');
+  totalAmount.unshift(bet);
+  localStorage.setItem('totalAmount', JSON.stringify(totalAmount));
+
+  listBets(totalAmount);
+}
+function validate(currentBet) {
+  let msg = '';
+  if (currentBet.event === '') {
+    msg += 'Informe o evento \n';
+  }
+  if (currentBet.amount === '') {
+    msg += 'Informe o valor \n';
+  }
+  if (currentBet.returns === '') {
+    msg += 'Informe o retorno obtido \n';
+  }
+
+  if (msg !== '') {
+    alert(msg);
+    return false;
+  }
+  return true;
+}
+
+function listBets(totalAmount) {
+  const tbody = document.querySelector('#tbody');
+  tbody.innerText = '';
+
+  for (let i = 0; i < totalAmount.length; i += 1) {
+    console.log(totalAmount[i]);
+    const tr = tbody.insertRow();
+    const tdEvent = tr.insertCell();
+    const tdAmount = tr.insertCell();
+    const tdReturns = tr.insertCell();
+    const tdResults = tr.insertCell();
+
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+
+    tdEvent.innerText = totalAmount[i]._name;
+    tdAmount.innerText = formatter.format(parseFloat(totalAmount[i]._amount));
+    tdReturns.innerText = formatter.format(parseFloat(totalAmount[i]._returns));
+    tdResults.innerText = totalAmount[i]._isPositive ? 'Lucro' : 'Prejuízo';
+  }
+}
+
+const showButtonModal = function () {
+  setTimeout(() => {
+    const button = document.getElementById('modalButton');
+    button.classList.remove('hidden');
+  }, 2000);
+};
 
 showButtonModal();
 
-(function() {
-    const namePage = document.getElementsByName('pageName')[0]
-    namePage.textContent.length < 15
-        ? namePage.textContent = namePage.textContent.toUpperCase()
-        : namePage.textContent = namePage.textContent.toLowerCase()
-    
-})()
+(function () {
+  const namePage = document.getElementsByName('pageName')[0];
+  namePage.textContent.length < 15
+    ? namePage.textContent = namePage.textContent.toUpperCase()
+    : namePage.textContent = namePage.textContent.toLowerCase();
+}());
 
 const myInterval = setInterval(myTimer, 1000);
 
-function myTimer() {
-  const date = new Date();
-  document.getElementById("time").innerHTML = date.toLocaleTimeString();
+function greeting(name) {
+  alert(`Olá, ${name}`);
 }
 
-function greeting(name) {
-    alert(`Olá, ${name}`);
-  }
-  
-  function processUserInput(callback) {
-    (function () {
-        let name = prompt("Qual seu nome?")
-        document.getElementById('name').innerHTML = `Aqui estão seus lançamentos, ${name || ''}`
-        callback(name);
-    })()
-    
-  }
-  
-  processUserInput(greeting);
+function processUserInput(callback) {
+  (function () {
+    const name = prompt('Qual seu nome?');
+    document.getElementById('name').innerHTML = `Aqui estão seus lançamentos, ${name || ''}`;
+    callback(name);
+  }());
+}
 
+processUserInput(greeting);
 
 function onClickBalanceLink() {
-    alert('Balanços estarão disponíveis em breve.')
+  alert('Balanços estarão disponíveis em breve.');
 }
 
 function loadTable() {
-    const table = document.getElementsByTagName('table')[0]
-    table.classList.remove('hidden')
+  document.getElementsByTagName('table')[0].classList.remove('hidden');
 }
 
-const title = document.getElementById('pageName')
+const title = document.getElementById('pageName');
 
 function onMouseEnterinTitle() {
-    title.classList.add('text-success')
+  title.classList.add('text-success');
 }
 
 function onMouseLeaveinTitle() {
-    title.classList.remove('text-success')
+  title.classList.remove('text-success');
 }
 
-const span = document.getElementById('spanInput')
+const span = document.getElementById('spanInput');
+
 function testCapsLock(event) {
-    if(event.code === "CapsLock"){
-        let isCapsLockOff = event.getModifierState("CapsLock");
-        if(isCapsLockOff) {
-            span.innerText = 'Capslock desativado'
-            return
-        } else {
-            span.innerText = 'Capslock ativado'
-        }
+  if (event.code === 'CapsLock') {
+    const isCapsLockOff = event.getModifierState('CapsLock');
+    if (isCapsLockOff) {
+      span.innerText = 'Capslock desativado';
+    } else {
+      span.innerText = 'Capslock ativado';
     }
+  }
 }
 
-document.addEventListener("keydown", testCapsLock);
+document.addEventListener('keydown', testCapsLock);
