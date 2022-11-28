@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="module" src="releases.js"></script>
+    <meta charset="UTF-8">
+    <title>Lançamentos</title>
+    <link href="../../../assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar bg-primary flex flex-col md:flex-row justify-between">
+    <div class="flex gap-4">
+        <a>
+            <button class="btn btn-ghost">Lançamentos</button>
+        </a>
+        <a href="../balances/balances.html">
+            <button class="btn btn-ghost">Balanço</button>
+        </a>
+    </div>
+    <span id="time"></span>
+    <h1 id="name">Seja bem vindo</h1>
+</div>
+<main class="p-2 md:p-4">
+    <h1 name="pageName" onmouseenter="classList.add('text-success')" id="pageName" class="text-2xl font-bold">Lançamentos</h1>
+    <div class="text-end">
+        <label for="my-modal" id="modalButton" class="hidden btn modal-button btn-secondary">Nova aposta</label>
+    </div>
+    <div class="mt-4 w-full">
+        <table name="table" id="table" class="border border-secondary border-1 w-full rounded">
+            <thead class="bg-secondary p-2">
+            <th>Evento</th>
+            <th>Valor</th>
+            <th>Retorno</th>
+            <th>Resultado</th>
+            </thead>
+            <tbody id="tbody" class="h-10 text-center">
+            </tbody>
+        </table>
+    </div>
+</main>
+<input type="checkbox" id="my-modal" class="modal-toggle" />
+<div class="modal">
+    <div class="modal-box flex flex-col gap-2">
+        <form>
+            <h3 class="font-bold text-lg">Cadastrar nova aposta</h3>
+            <div class="grid gap-1">
+                <label for="event">Evento</label>
+                <input type="text" required maxlength="50" id="event" onblur="style.color = 'white'" onfocus="style.color = 'yellow'" class="input input-bordered w-full">
+                <span class="text-xs" id="spanInput"></span>
+            </div>
+            <div class="grid gap-1">
+                <label>Valor apostado</label>
+                <label class="input-group">
+                    <span>R$</span>
+                    <input type="number" min="0" pattern="/^[0-9]*(\.[0-9]{0,2})?$/" required id="amount" class="input input-bordered w-full" />
+                </label>
+            </div>
+            <div class="grid gap-1">
+                <label>Retorno obtido</label>
+                <label class="input-group">
+                    <span>R$</span>
+                    <input type="number" required pattern="/^[0-9]*(\.[0-9]{0,2})?$/" min="0" id="returns" class="input input-bordered w-full" />
+                </label>
+            </div>
+            <div class="modal-action flex flex-col md:flex-row md:justify-between gap-2">
+                <label for="my-modal" id="close" class="btn btn-sm w-auto">Cancelar</label>
+                <div class="flex justify-center gap-1">
+                    <label id="clear" class="btn btn-sm">Limpar</label>
+                    <label id="add" class="btn btn-sm btn-secondary">Cadastrar</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

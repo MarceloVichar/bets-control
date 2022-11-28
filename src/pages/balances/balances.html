@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="../balances/balances.js"></script>
     <meta charset="UTF-8">
-    <title>bets control</title>
-    <link href="../assets/css/index.css" rel="stylesheet">
+    <title>Balanço</title>
+    <link href="../../../assets/css/main.css" rel="stylesheet">
 </head>
 <body>
 <div class="navbar bg-primary flex flex-col md:flex-row justify-between">
     <div class="flex gap-4">
-        <a href="pages/releases/releases.html">
+        <a href="../releases/releases.html">
             <button class="btn btn-ghost">Lançamentos</button>
         </a>
-        <a href="pages/balances/balances.html">
+        <a>
             <button class="btn btn-ghost">Balanço</button>
         </a>
     </div>
@@ -20,7 +20,7 @@
     <h1 id="name">Seja bem vindo</h1>
 </div>
 <main class="p-2 md:p-4">
-    <h2 class="text-center text-4xl my-12">Selecione uma das opções no menu para controlar suas apostas</h2>
+    <h1 name="pageName" onmouseenter="classList.add('text-success')" id="pageName" class="text-2xl font-bold">Balanços</h1>
 </main>
 </body>
 </html>
