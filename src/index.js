@@ -1,3 +1,12 @@
+import axios from 'axios';
+
+(async function () {
+  await axios.get('https://api.adviceslip.com/advice').then((res) => {
+    document.getElementById('advice').innerText = res.data.slip.advice;
+  }).catch(() => {
+    document.getElementById('advice').innerText = '';
+  });
+}());
 function greeting(name) {
   alert(`Olá, ${name}`);
 }

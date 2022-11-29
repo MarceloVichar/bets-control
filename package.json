@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MarceloVichar/bets-control#readme",
   "devDependencies": {
+    "buffer": "^6.0.3",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -31,6 +32,7 @@
     "tailwindcss": "^3.1.8"
   },
   "dependencies": {
+    "axios": "^1.2.0",
     "daisyui": "^2.31.0"
   }
 }
