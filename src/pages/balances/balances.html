@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <script type="module" src="../balances/balances.js"></script>
     <meta charset="UTF-8">
     <title>Balanço</title>
@@ -21,6 +24,23 @@
 </div>
 <main class="p-2 md:p-4">
     <h1 name="pageName" onmouseenter="classList.add('text-success')" id="pageName" class="text-2xl font-bold">Balanços</h1>
+    <div id="description" class="w-full text-center my-4">
+        <span>Aqui está o balanço total de suas apostas</span>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-4 mt-4">
+        <div id="amountBox" class="box w-full rounded shadow border p-2">
+            <p>Valor Aspostado</p>
+            <div class="text-center font-bold text-2xl py-4 overflow-x-hidden">R$ 123.09</div>
+        </div>
+        <div id="returnsBox" class="box w-full rounded shadow border p-2">
+            <p>Valor Recebido</p>
+            <div class="text-center font-bold text-2xl py-4 overflow-x-hidden">R$ 123.09</div>
+        </div>
+        <div id="balanceBox" class="box w-full rounded shadow border p-2">
+            <p>Balanço total</p>
+            <div class="text-center font-bold text-2xl py-4 overflow-x-hidden">R$ 123.09</div>
+        </div>
+    </div>
 </main>
 </body>
 </html>
